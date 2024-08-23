@@ -74,7 +74,7 @@ https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParal
 0. 命令行启动分布式训练脚本时候，使用torch.distributed.launch 或者torchrun来启动单机多卡进程，负责传一些参数 比如用多少节点，多机情况下，要每个机器上都跑一个脚本，通过设置 master_addr 来告诉多机该找哪个机器通信，神威应该在启动的时候 会不太一样，走exec。
 ```python
 python -m torch.distributed.launch $DISTRIBUTED_ARGS \
-exec  python3 ./pretrain_wenhai.py \
+exec  python3 ./pretrain.py \
 ```
 1. DistributedSampler 划分数据集，确定每个数据并行节点所需要处理的数据。
 2. Dataloader 会根据数据并行rank来从数据集中抽取返回不同的数据
