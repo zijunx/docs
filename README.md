@@ -39,7 +39,7 @@ ddp_model = DDP(model, device_ids=[rank])
 https://pytorch.org/docs/stable/notes/ddp.html#distributeddataparallel
 
 
-
+DDP不会自动将输入数据分割或分片到参与的GPU上；用户需要自己定义如何进行数据分片，例如通过使用DistributedSampler。
 
 **使用`DistributedSampler`**:
 ```python
