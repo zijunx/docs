@@ -87,3 +87,5 @@ hook(module, args, output) -> None or modified output
 反向hook
 hook(module, grad_input, grad_output) -> tuple(Tensor) or None
 ```
+https://www.jianshu.com/p/69e57e3526b3
+https://blog.csdn.net/m0_51661400/article/details/135091359
