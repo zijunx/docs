@@ -1,6 +1,6 @@
 # Megatron源码阅读
 
-数据并行 -- DP和DDP
+## 数据并行 -- DP和DDP
 在PyTorch中，实现数据并行的主要方法是使用`torch.nn.DataParallel`和`torch.nn.parallel.DistributedDataParallel`（DDP）。以下是这两种方法的简要概述：
 
 ### 1. DataParallel(DP: 单机多卡, 单进程多线程，效率很低)
