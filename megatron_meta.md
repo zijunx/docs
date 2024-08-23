@@ -3,7 +3,7 @@
 2. 训练开始前，读取ckpt，将对应的参数全部覆盖。
 3. 训练时，调用forward，已经是最新的ckpt过的参数了。
 
-###torch hook
+### torch hook
 https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.register_forward_hook
 
 register_forward_pre_hook 前向传播前
