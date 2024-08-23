@@ -28,6 +28,8 @@ https://pytorch.org/docs/stable/generated/torch.nn.DataParallel.html#dataparalle
 
 ### 2. DistributedDataParallel(DDP: 在每个rank上单独启进程，真正的多进程分布式)
 `DistributedDataParallel`是用于多机多GPU数据并行的类。它需要配合`torch.distributed`通信包使用。
+
+DDP容器：DDP通过在每个模型副本之间同步梯度来提供数据并行性。
 ![image](https://github.com/user-attachments/assets/25249b2d-3f46-4824-ab74-710f84cb11bf)
 **基本写法**:
 ```python
@@ -39,7 +41,7 @@ ddp_model = DDP(model, device_ids=[rank])
 https://pytorch.org/docs/stable/notes/ddp.html#distributeddataparallel
 
 
-DDP不会自动将输入数据分割或分片到参与的GPU上；用户需要自己定义如何进行数据分片，例如通过使用DistributedSampler。
+数据分片：DDP不会自动将输入数据分割或分片到参与的GPU上；用户需要自己定义如何进行数据分片，例如通过使用DistributedSampler。
 
 **使用`DistributedSampler`**:
 ```python
