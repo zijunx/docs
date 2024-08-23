@@ -77,6 +77,38 @@ python -m torch.distributed.launch $DISTRIBUTED_ARGS \
 exec  python3 ./pretrain.py \
 ```
 1. DistributedSampler 划分数据集，确定每个数据并行节点所需要处理的数据。
-2. Dataloader 会根据数据并行rank来从数据集中抽取返回不同的数据
-3. DistributedDataParallel  用来实现 每个数据并行节点在梯度计算后的规约操作。
+```python
+class DistributedSampler(Sampler[T_co]):
+    def __iter__(self) -> Iterator[T_co]:
+        if self.shuffle:
+            # deterministically shuffle based on epoch and seed
+            g = torch.Generator()
+            g.manual_seed(self.seed + self.epoch)
+            indices = torch.randperm(len(self.dataset), generator=g).tolist()  # type: ignore[arg-type]
+        else:
+            indices = list(range(len(self.dataset)))  # type: ignore[arg-type]
 
+        if not self.drop_last:
+            # add extra samples to make it evenly divisible
+            padding_size = self.total_size - len(indices)
+            if padding_size <= len(indices):
+                indices += indices[:padding_size]
+            else:
+                indices += (indices * math.ceil(padding_size / len(indices)))[:padding_size]
+        else:
+            # remove tail of data to make it evenly divisible.
+            indices = indices[:self.total_size]
+        assert len(indices) == self.total_size
+
+        # subsample
+        indices = indices[self.rank:self.total_size:self.num_replicas]
+        assert len(indices) == self.num_samples
+
+        return iter(indices)
+```
+3. Dataloader 会根据数据并行rank来从数据集中抽取返回不同的数据
+
+5. DistributedDataParallel  用来实现 每个数据并行节点在梯度计算后的规约操作。
+```python
+
+```
