@@ -58,7 +58,7 @@ data_loader = DataLoader(dataset, batch_size=32, sampler=sampler)
 https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel
 
 完整例子test_mul_node.py：
-'''
+```python
         dist.init_process_group(backend='mpi')
         world_size = dist.get_world_size()
         rank = dist.get_rank()
@@ -70,14 +70,12 @@ https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParal
                 model = MPI_Lenet()
                 model = DistributedDataParallel(model)
                 model.train()
-'''
+```
 0. 命令行启动分布式训练脚本时候，使用torch.distributed.launch 或者torchrun来启动单机多卡进程，负责传一些参数 比如用多少节点，多机情况下，要每个机器上都跑一个脚本，通过设置 master_addr 来告诉多机该找哪个机器通信，神威应该在启动的时候 会不太一样，走exec。
-'''
+```python
 python -m torch.distributed.launch $DISTRIBUTED_ARGS \
-'''
-'''
 exec  python3 ./pretrain_wenhai.py \
-'''
+```
 1. DistributedSampler 划分数据集，确定每个数据并行节点所需要处理的数据。
 2. Dataloader 会根据数据并行rank来从数据集中抽取返回不同的数据
 3. DistributedDataParallel  用来实现 每个数据并行节点在梯度计算后的规约操作。
