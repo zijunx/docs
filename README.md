@@ -37,6 +37,8 @@ model = model.to(rank)  # 将模型移到对应的GPU
 ddp_model = DDP(model, device_ids=[rank])
 ```
 https://pytorch.org/docs/stable/notes/ddp.html#distributeddataparallel
+![image](https://github.com/user-attachments/assets/25249b2d-3f46-4824-ab74-710f84cb11bf)
+
 
 **使用`DistributedSampler`**:
 ```python
