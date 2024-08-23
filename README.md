@@ -39,3 +39,5 @@ from torch.utils.data.distributed import DistributedSampler
 
 sampler = DistributedSampler(dataset, num_replicas=world_size, rank=rank)
 data_loader = DataLoader(dataset, batch_size=32, sampler=sampler)
+
+## LocalDDP -- 数据并行
