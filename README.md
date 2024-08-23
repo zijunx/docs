@@ -76,6 +76,8 @@ https://pytorch.org/docs/stable/generated/torch.nn.parallel.DistributedDataParal
 python -m torch.distributed.launch $DISTRIBUTED_ARGS \
 exec  python3 ./pretrain.py \
 ```
+https://pytorch.org/docs/stable/elastic/run.html
+
 1. DistributedSampler 划分数据集，确定每个数据并行节点所需要处理的数据。
 ```python
 class DistributedSampler(Sampler[T_co]):
