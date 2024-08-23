@@ -1,6 +1,8 @@
 # Megatron源码阅读
 ![image](https://github.com/user-attachments/assets/7a66d2d5-94a5-4587-a021-dd4905b671c5)
 
+做数据并行，需要一个这种ddp或者dp先把模型包一下，处理模型副本的拷贝
+ddp本身至少应该包含：规定怎么在训练开始前分发模型，怎么在训练结束后规约梯度。
 
 ## torchDDP -- 数据并行 -- DP和DDP
 在PyTorch中，实现数据并行的主要方法是使用`torch.nn.DataParallel`和`torch.nn.parallel.DistributedDataParallel`（DDP）。以下是这两种方法的简要概述：
@@ -9,6 +11,8 @@
 `DataParallel`是PyTorch中用于单机多GPU数据并行的类。它通过复制模型到每个GPU上，并将数据分割后发送到各个GPU上进行并行计算。
 
 **基本写法**:
+![0c724ae5fe03f9060c3596a9ef36e26](https://github.com/user-attachments/assets/f61067d3-64d6-48bc-9660-1fd269c73e42)
+
 ```python
 import torch.nn as nn
 
