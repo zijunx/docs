@@ -38,7 +38,6 @@ ddp_model = DDP(model, device_ids=[rank])
 ```
 https://pytorch.org/docs/stable/notes/ddp.html#distributeddataparallel
 ![image](https://github.com/user-attachments/assets/25249b2d-3f46-4824-ab74-710f84cb11bf)
-![image](https://github.com/user-attachments/assets/86c4ca4b-edda-4fc3-9fdd-a08fe8c3d2fe)
 
 
 
