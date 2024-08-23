@@ -11,20 +11,20 @@ ddp本身至少应该包含：规定怎么在训练开始前分发模型，怎�
 `DataParallel`是PyTorch中用于单机多GPU数据并行的类。它通过复制模型到每个GPU上，并将数据分割后发送到各个GPU上进行并行计算。
 
 **基本写法**:
-![0c724ae5fe03f9060c3596a9ef36e26](https://github.com/user-attachments/assets/f61067d3-64d6-48bc-9660-1fd269c73e42)
 
 ```python
 import torch.nn as nn
 
 model = nn.Linear(10, 10)  # 假设有一个模型
 if torch.cuda.device_count() > 1:
-    model = nn.DataParallel(model)
+    model = nn.DataParallel(model, device_ids=[0, 1])
 ```
 
 **使用`device_ids`指定GPU**:
 ```python
 model = nn.DataParallel(model, device_ids=[0, 1])
 ```
+https://pytorch.org/docs/stable/generated/torch.nn.DataParallel.html#dataparallel
 
 ### 2. DistributedDataParallel(DDP: 在每个rank上单独启进程，真正的多进程分布式)
 `DistributedDataParallel`是用于多机多GPU数据并行的类。它需要配合`torch.distributed`通信包使用。
@@ -36,6 +36,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 model = model.to(rank)  # 将模型移到对应的GPU
 ddp_model = DDP(model, device_ids=[rank])
 ```
+https://pytorch.org/docs/stable/notes/ddp.html#distributeddataparallel
 
 **使用`DistributedSampler`**:
 ```python
