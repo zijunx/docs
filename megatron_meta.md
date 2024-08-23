@@ -66,3 +66,16 @@ def save_gradients_and_inputs(name):
                 self.down_blk2.b[4].register_full_backward_hook(back_hook)
         self.div_val=self.patch_size[0] * 2
 ```
+
+```python
+output <class 'torch.Tensor'>
+input_0 shape torch.Size([1, 768, 133, 273])
+grad_input_0 shape torch.Size([1, 768, 133, 273])
+grad_output_0 shape torch.Size([1, 768, 133, 273])
+Grad Input for down_blk2_b4: (tensor([[[[-1.7771e-08,  2.7944e-09, -1.9785e-09,  ...,  5.2107e-08,^M
+           -2.3024e-09, -7.5307e-08],^M
+          [ 3.0019e-07, -7.5822e-08, -7.9020e-08,  ..., -1.3240e-07,^M
+            1.8376e-08,  1.6460e-08],^M
+          [-3.2822e-07,  2.9710e-08, -2.9138e-08,  ...,  1.0046e-08,^M
+           -3.6316e-09,  1.0978e-08],^M
+```
