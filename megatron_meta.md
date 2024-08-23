@@ -66,7 +66,7 @@ def save_gradients_and_inputs(name):
                 self.down_blk2.b[4].register_full_backward_hook(back_hook)
         self.div_val=self.patch_size[0] * 2
 ```
-
+只执行了一个迭代，所以不存在tensor被覆盖的问题。
 ```python
 output <class 'torch.Tensor'>
 input_0 shape torch.Size([1, 768, 133, 273])
