@@ -82,5 +82,8 @@ Grad Input for down_blk2_b4: (tensor([[[[-1.7771e-08,  2.7944e-09, -1.9785e-09, 
 这个回调函数会在模块的前向传播结束后被调用，接收三个参数：模块本身、输入、输出。
 The hook should have the following signature:
 ```python
+前向hook
 hook(module, args, output) -> None or modified output
+反向hook
+hook(module, grad_input, grad_output) -> tuple(Tensor) or None
 ```
