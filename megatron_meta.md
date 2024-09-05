@@ -89,3 +89,10 @@ hook(module, grad_input, grad_output) -> tuple(Tensor) or None
 ```
 https://www.jianshu.com/p/69e57e3526b3
 https://blog.csdn.net/m0_51661400/article/details/135091359
+
+
+![image](https://github.com/user-attachments/assets/49a359b3-e386-4581-ba69-33f58afcc3b8)
+class Conv2d(_ConvNd):
+class _ConvNd(Module): 
+只要最终继承自Module就可以直接注册钩子函数
+
